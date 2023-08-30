@@ -1,0 +1,22 @@
+INSERT INTO etat (id, type_etat, description_etat)
+VALUES
+    (1, 'en maintenance', 'Le matériel est en cours de maintenance pour des réparations ou des mises à niveau.'),
+    (2, 'en maintenance', 'Le matériel est en cours de maintenance pour des réparations ou des mises à niveau.'),
+    (3, 'en maintenance', 'Le matériel est en cours de maintenance pour des réparations ou des mises à niveau.'),
+    (4, 'en maintenance', 'Le matériel est en cours de maintenance pour des réparations ou des mises à niveau.'),
+    (5, 'en maintenance', 'Le matériel est en cours de maintenance pour des réparations ou des mises à niveau.'),
+    (6, 'en maintenance', 'Le matériel est en cours de maintenance pour des réparations ou des mises à niveau.'),
+    (7, 'en maintenance', 'Le matériel est en cours de maintenance pour des réparations ou des mises à niveau.'),
+    (8, 'en maintenance', 'Le matériel est en cours de maintenance pour des réparations ou des mises à niveau.'),
+    (9, 'en maintenance', 'Le matériel est en cours de maintenance pour des réparations ou des mises à niveau.'),
+    (10, 'en maintenance', 'Le matériel est en cours de maintenance pour des réparations ou des mises à niveau.'),
+    (11, 'en panne', 'Le matériel est actuellement en panne et ne fonctionne pas correctement.'),
+    (12, 'en panne', 'Le matériel est actuellement en panne et ne fonctionne pas correctement.'),
+    (13, 'en panne', 'Le matériel est actuellement en panne et ne fonctionne pas correctement.'),
+    (14, 'en panne', 'Le matériel est actuellement en panne et ne fonctionne pas correctement.'),
+    (15, 'bon état', 'Le matériel est en bon état de fonctionnement et ne nécessite aucune maintenance.'),
+    (16, 'bon état', 'Le matériel est en bon état de fonctionnement et ne nécessite aucune maintenance.'),
+    (17, 'bon état', 'Le matériel est en bon état de fonctionnement et ne nécessite aucune maintenance.'),
+    (18, 'bon état', 'Le matériel est en bon état de fonctionnement et ne nécessite aucune maintenance.'),
+    (19, 'bon état', 'Le matériel est en bon état de fonctionnement et ne nécessite aucune maintenance.'),
+    (20, 'bon état', 'Le matériel est en bon état de fonctionnement et ne nécessite aucune maintenance.');
