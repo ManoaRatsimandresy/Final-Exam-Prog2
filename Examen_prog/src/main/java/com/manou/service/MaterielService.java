@@ -12,6 +12,14 @@ import java.util.List;
 public class MaterielService {
     private MaterielRepository materielRepository;
 
+    public List<Materiel> getMaterielsWithState() {
+        try {
+            return this.materielRepository.getMaterielWithState();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
     public List<Materiel> getAllMateriel() {
         try {
             return this.materielRepository.getAllMateriel();
@@ -55,7 +63,7 @@ public class MaterielService {
     public String deleteMateriel(int id) {
         try {
             materielRepository.deleteMateriel(id);
-            return "Frais effacé avec succes";
+            return "Materiels Suprrimé";
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;

@@ -17,5 +17,7 @@ public class Utilisation {
     private int id_personnel;
     private LocalDate date_debut;
     private  LocalDate date_fin;
+    private Personnel personnel;
+    private Materiel materiel;
 
 }

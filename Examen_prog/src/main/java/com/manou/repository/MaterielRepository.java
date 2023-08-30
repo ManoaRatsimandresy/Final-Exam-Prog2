@@ -1,5 +1,6 @@
 package com.manou.repository;
 
+import com.manou.model.Etat;
 import com.manou.model.Materiel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,14 +16,27 @@ import java.util.List;
 public class MaterielRepository {
     private Connection connection;
     public Materiel createNewInstance(ResultSet resultSet) throws SQLException {
+        Etat etat = new Etat(
+                resultSet.getInt("id"),
+                resultSet.getString("type_etat"),
+                resultSet.getString("description_etat")
+        );
         return new Materiel(
                 resultSet.getInt("id"),
                 resultSet.getString("type_materiel"),
-                resultSet.getInt("id_etat"));
+                resultSet.getInt("id_etat"),
+                etat);
     }
 
-    public List<Materiel> getAllMateriel() throws SQLException {
-        String sql = "SELECT * FROM materiel";
+    public Materiel createNewSimpleInstance(ResultSet resultSet) throws SQLException {
+        return new Materiel(
+                resultSet.getInt("id"),
+                resultSet.getString("type_materiel"),
+                resultSet.getInt("id_etat"),
+                (new Etat()));
+    }
+    public List<Materiel> getMaterielWithState() throws SQLException {
+        String sql = "SELECT * FROM materiel JOIN etat ON materiel.id_etat=etat.id ;";
         List<Materiel> list = new ArrayList<>();
         ResultSet resultSet = this.connection.createStatement().executeQuery(sql);
         while(resultSet.next()){
@@ -31,13 +45,23 @@ public class MaterielRepository {
         return list;
     }
 
-    public Materiel getMaterielById(int id_FS) throws SQLException {
-        String sql = "SELECT * FROM frais_de_scolarite where id_FS = ?";
+    public List<Materiel> getAllMateriel() throws SQLException {
+        String sql = "SELECT * FROM materiel";
+        List<Materiel> list = new ArrayList<>();
+        ResultSet resultSet = this.connection.createStatement().executeQuery(sql);
+        while(resultSet.next()){
+            list.add(this.createNewSimpleInstance(resultSet));
+        }
+        return list;
+    }
+
+    public Materiel getMaterielById(int id) throws SQLException {
+        String sql = "SELECT * FROM materiel where id = ?";
         PreparedStatement statement = this.connection.prepareStatement(sql);
-        statement.setInt(1, id_FS);
+        statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         if(resultSet.next()){
-            return this.createNewInstance(resultSet);
+            return this.createNewSimpleInstance(resultSet);
         }
         return null;    }
 

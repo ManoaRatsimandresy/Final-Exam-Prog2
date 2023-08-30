@@ -1,5 +1,8 @@
 package com.manou.repository;
 
+import com.manou.model.Etat;
+import com.manou.model.Materiel;
+import com.manou.model.Personnel;
 import com.manou.model.Utilisation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -12,18 +15,48 @@ import java.util.List;
 public class UtilisationRepository {
         private Connection connection;
 
-        public Utilisation createNewInstance(ResultSet resultSet) throws SQLException {
+    public Utilisation createNewInstance(ResultSet resultSet) throws SQLException {
+        return new Utilisation(
+                resultSet.getInt("id"),
+                resultSet.getInt("id_materiel"),
+                resultSet.getInt("id_personnel"),
+                resultSet.getDate("date_debut").toLocalDate(),
+                resultSet.getDate("date_fin").toLocalDate(),
+                (new Personnel()),
+                (new Materiel()));
+    }
+        public Utilisation createNewInstanceInfo(ResultSet resultSet) throws SQLException {
+            Personnel personnel = new Personnel(
+                    resultSet.getInt("id_personnel"),
+                    resultSet.getString("nom_personnel"),
+                    resultSet.getString("fonction")
+            );
+            Materiel materiel = new Materiel(
+                    resultSet.getInt("id_materiel"),
+                    resultSet.getString("type_materiel"),
+                    resultSet.getInt("id_etat"),
+                    (new Etat())
+            );
             return new Utilisation(
                     resultSet.getInt("id"),
                     resultSet.getInt("id_materiel"),
                     resultSet.getInt("id_personnel"),
                     resultSet.getDate("date_debut").toLocalDate(),
-                    resultSet.getDate("date_fin").toLocalDate());
-
-
+                    resultSet.getDate("date_fin").toLocalDate(),
+                    personnel,
+                    materiel);
         }
 
 
+    public List<Utilisation> getAllUseInfo() throws SQLException {
+        String sql = "SELECT * FROM utilisation JOIN personnel on utilisation.id_personnel = personnel.id JOIN materiel on utilisation.id_materiel = materiel.id";
+        List<Utilisation> list = new ArrayList<>();
+        ResultSet resultSet = this.connection.createStatement().executeQuery(sql);
+        while (resultSet.next()) {
+            list.add(this.createNewInstanceInfo(resultSet));
+        }
+        return list;
+    }
         public List<Utilisation> getAllUse() throws SQLException {
             String sql = "SELECT * FROM utilisation";
             List<Utilisation> list = new ArrayList<>();
@@ -37,7 +70,7 @@ public class UtilisationRepository {
 
 
     public Utilisation getUseById(int id) throws SQLException {
-        String sql = "SELECT * FROM paiements where id = ?";
+        String sql = "SELECT * FROM utilisation where id = ?";
         PreparedStatement statement = this.connection.prepareStatement(sql);
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();

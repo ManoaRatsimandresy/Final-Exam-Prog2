@@ -11,4 +11,5 @@ public class Materiel {
     private int id;
     private String type_materiel;
     private int id_etat;
+    private Etat etat;
 }

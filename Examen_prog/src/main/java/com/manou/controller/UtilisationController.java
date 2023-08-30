@@ -17,6 +17,11 @@ public class UtilisationController {
         return this.utilisationService.getAllUse();
     }
 
+    @GetMapping("/Utilisation/Info")
+    public List<Utilisation> getAllUseInfo() {
+        return this.utilisationService.getAllUseInfo();
+    }
+
     @GetMapping("/Utilisation/id/{id}")
     public Utilisation getUseByStd(@PathVariable int id) {
         return this.utilisationService.getUseById(id);

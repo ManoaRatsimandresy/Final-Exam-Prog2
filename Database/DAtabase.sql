@@ -1,6 +1,6 @@
 Create database gestion_parc_informatique;
 
-/c gestion_parc_informatique
+\c gestion_parc_informatique;
 -- Table: Personnel
 ------------------------------------------------------------
 CREATE TABLE Personnel(

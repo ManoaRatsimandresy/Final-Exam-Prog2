@@ -12,12 +12,17 @@ import java.util.List;
 public class MaterielController {
     private MaterielService materielService;
 
+    @GetMapping("/Materiel/EtatMateriel")
+    public List<Materiel> getMaterielWithState() {
+        return this.materielService.getMaterielsWithState();
+    }
+
     @GetMapping("/Materiel")
     public List<Materiel> getAllMateriel() {
         return this.materielService.getAllMateriel();
     }
 
-    @GetMapping("/Materiel/id/{id}")
+    @GetMapping("/Materiel/{id}")
     public Materiel getMaterielById(@PathVariable int id) {
         return this.materielService.getMaterielById(id);
     }

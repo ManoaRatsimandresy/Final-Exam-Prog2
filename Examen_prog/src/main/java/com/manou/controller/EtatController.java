@@ -29,7 +29,7 @@ public class EtatController {
         return etatService.createState(etat);
     }
 
-    @PutMapping("/Etat/{id}")
+    @PutMapping("/Etat/update/{id}")
     public Etat updateState(@PathVariable int id, @RequestBody Etat etat) {
         return etatService.updateState(id, etat);
     }

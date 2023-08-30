@@ -11,6 +11,14 @@ import java.util.List;
 public class UtilisationService {
     private UtilisationRepository utilisationRepository;
 
+    public List<Utilisation> getAllUseInfo(){
+        try {
+            return this.utilisationRepository.getAllUseInfo();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
     public List<Utilisation> getAllUse(){
         try {
             return this.utilisationRepository.getAllUse();
