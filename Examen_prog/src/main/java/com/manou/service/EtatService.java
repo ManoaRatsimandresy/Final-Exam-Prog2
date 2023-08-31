@@ -57,7 +57,7 @@ public class EtatService {
     public String deleteState(int id){
         try {
             etatRepository.deleteState(id);
-            return "Etudiant effacé avec succes";
+            return "Etata Suprrimé";
         } catch (SQLException e){
             System.out.println(e.getMessage());
             return null;
